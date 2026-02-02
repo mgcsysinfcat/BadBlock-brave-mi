@@ -1,0 +1,38 @@
+name: Sync & Convert BadBlock brave.txt
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 3 * * *"   # 每天 UTC 03:00 运行（按需改）
+
+permissions:
+  contents: write  # 允许提交回仓库（非常关键）[8](https://cicube.io/workflow-hub/github-auto-commit-action/)[9](https://stackoverflow.com/questions/55657835/is-there-a-way-to-push-changes-with-a-github-action)
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6  # 官方 checkout action [6](https://github.com/actions/checkout)[7](https://github.com/marketplace/actions/checkout)
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Convert
+        run: |
+          python scripts/convert.py
+
+      - name: Commit & push if changed
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"  # 常用 bot 身份[10](https://www.junian.net/dev/github-actions-bot-username-email-address/)
+
+          if [[ -n "$(git status --porcelain)" ]]; then
+            git add dist/brave_domain.txt dist/brave_domain.yaml
+            git commit -m "chore: sync brave ruleset"
+            git push
+          else
+            echo "No changes."
+          fi
