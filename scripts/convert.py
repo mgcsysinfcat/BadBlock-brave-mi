@@ -4,7 +4,7 @@ import sys
 import urllib.request
 from pathlib import Path
 
-UPSTREAM = "https://raw.githubusercontent.com/celenityy/BadBlock//main/wildcards-star/brave.txt"
+UPSTREAM = "https://raw.githubusercontent.com/celenityy/BadBlock/pages/wildcards-star/brave.txt"
 
 DIST_DIR = Path("dist")
 TXT_OUT = DIST_DIR / "brave_domain.txt"
