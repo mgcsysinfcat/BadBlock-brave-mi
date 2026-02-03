@@ -3,7 +3,7 @@ import re
 import urllib.request
 from pathlib import Path
 
-UPSTREAM = "https://raw.githubusercontent.com/celenityy/BadBlock/651b835e9ea1d9629a357721f9d4b925411efdce/wildcards-star/brave.txt"
+UPSTREAM = "https://raw.githubusercontent.com/celenityy/BadBlock/pages/wildcards-star/brave.txt"
 
 DIST_DIR = Path("dist")
 TXT_OUT = DIST_DIR / "brave_domain.txt"
