@@ -27,7 +27,8 @@ jobs:
       - name: Commit & push if changed
         run: |
           git config --global user.name "github-actions[bot]"
-          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"  # 常用 bot 身份[10](https://www.junian.net/dev/github-actions-bot-username-email-address/)
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"  
+          # 常用 bot 身份[10](https://www.junian.net/dev/github-actions-bot-username-email-address/)
 
           if [[ -n "$(git status --porcelain)" ]]; then
             git add dist/brave_domain.txt dist/brave_domain.yaml
